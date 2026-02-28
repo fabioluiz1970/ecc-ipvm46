@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ecc-ipvm46</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="topo">
+    <img src="logo-ecc.png" alt="Logo ECC" class="logo">
+    <h1>ecc-ipvm46</h1>
+</header>
+
+<nav>
+    <button data-target="cronograma">Cronograma</button>
+    <button data-target="dashboard">Dashboard</button>
+    <button data-target="timeline">Timeline</button>
+    <button data-target="acoes">Ações</button>
+    <button data-target="impressao">Impressão</button>
+    <button data-target="link">Link / QRCode</button>
+</nav>
+
+<main>
+
+<!-- MÓDULO: CRONOGRAMA GERAL -->
+<section id="cronograma" class="modulo hidden">
+    <h2>Cronograma Geral</h2>
+
+    <div class="card">
+        <h3>Adicionar Atividade</h3>
+
+        <label>Dia</label>
+        <select id="dia">
+            <option value="Sábado">Sábado</option>
+            <option value="Domingo">Domingo</option>
+        </select>
+
+        <label>Início previsto</label>
+        <input type="time" id="iniPrev">
+
+        <label>Fim previsto</label>
+        <input type="time" id="fimPrev">
+
+        <label>Atividade</label>
+        <input type="text" id="atividade">
+
+        <label>Local</label>
+        <input type="text" id="local">
+
+        <label>Observações</label>
+        <input type="text" id="obs">
+
+        <button class="btn-primary" onclick="adicionarAtividade()">Salvar Atividade</button>
+    </div>
+
+    <div id="listaCrono"></div>
+</section>
+
+<!-- MÓDULO: DASHBOARD -->
+<section id="dashboard" class="modulo hidden"></section>
+
+<!-- MÓDULO: TIMELINE -->
+<section id="timeline" class="modulo hidden"></section>
+
+<!-- MÓDULO: AÇÕES -->
+<section id="acoes" class="modulo hidden"></section>
+
+<!-- MÓDULO: IMPRESSÃO -->
+<section id="impressao" class="modulo hidden"></section>
+
+<!-- MÓDULO: LINK / QR -->
+<section id="link" class="modulo hidden"></section>
+
+</main>
+
+<!-- LOGIN -->
+<div id="login-modal" class="modal hidden">
+    <div class="modal-box">
+        <h2>Acesso ao Sistema</h2>
+
+        <label>Perfil</label>
+        <select id="login-perfil">
+            <option value="visitante">Visitante</option>
+            <option value="equipe">Equipe</option>
+            <option value="admin">Admin</option>
+        </select>
+
+        <label>Senha</label>
+        <input type="password" id="login-senha">
+
+        <button id="btn-login">Entrar</button>
+        <p id="login-erro" class="erro"></p>
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
