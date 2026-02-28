@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECC IPVM 46</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header>
+    <h1>ECC IPVM 46</h1>
+    <nav>
+        <button class="tab-btn" data-tab="cadastro">Cadastro</button>
+        <button class="tab-btn" data-tab="cronograma">Cronograma</button>
+        <button class="tab-btn" data-tab="sabado">Sábado</button>
+        <button class="tab-btn" data-tab="domingo">Domingo</button>
+        <button class="tab-btn" data-tab="resumo">Resumo Geral</button>
+        <button class="tab-btn" data-tab="timeline">Timeline</button>
+    </nav>
+</header>
+
+<!-- ABA CADASTRO -->
+<section id="cadastro" class="tab-content">
+    <h2>Cadastro de Bases</h2>
+
+    <form id="cadastroForm">
+        <label>Dia:</label>
+        <select id="cad-dia" required>
+            <option value="">Selecione</option>
+            <option value="sabado">Sábado</option>
+            <option value="domingo">Domingo</option>
+        </select>
+
+        <label>Local:</label>
+        <input type="text" id="cad-local" placeholder="Ex: Salão, Dormitório" required>
+
+        <label>Equipe:</label>
+        <input type="text" id="cad-equipe" placeholder="Ex: Logística, Recepção" required>
+
+        <label>Atividade:</label>
+        <input type="text" id="cad-atividade" placeholder="Ex: Jantar, Dinâmica" required>
+
+        <label>Ação:</label>
+        <input type="text" id="cad-acao" placeholder="Ex: Preparar, Conduzir" required>
+
+        <button type="submit">Incluir Base</button>
+    </form>
+
+    <div id="cadastroLista"></div>
+</section>
+
+<!-- ABA CRONOGRAMA -->
+<section id="cronograma" class="tab-content">
+    <h2>Cronograma Previsto</h2>
+
+    <form id="cronogramaForm">
+
+        <label>Selecionar Base:</label>
+        <select id="crono-base" required></select>
+
+        <label>Hora Início Previsto:</label>
+        <input type="time" id="crono-inicio-prev" required>
+
+        <label>Hora Fim Previsto:</label>
+        <input type="time" id="crono-fim-prev" required>
+
+        <label>Observação:</label>
+        <input type="text" id="crono-obs" placeholder="Opcional">
+
+        <button type="submit">Adicionar ao Cronograma</button>
+    </form>
+
+    <div id="cronogramaLista"></div>
+</section>
+
+<!-- ABA SÁBADO -->
+<section id="sabado" class="tab-content">
+    <h2>Execução — Sábado</h2>
+    <div id="listaSabado"></div>
+</section>
+
+<!-- ABA DOMINGO -->
+<section id="domingo" class="tab-content">
+    <h2>Execução — Domingo</h2>
+    <div id="listaDomingo"></div>
+</section>
+
+<!-- RESUMO GERAL -->
+<section id="resumo" class="tab-content">
+    <h2>Resumo Geral</h2>
+    <div id="resumoContainer"></div>
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline" class="tab-content">
+    <h2>Timeline Proporcional</h2>
+
+    <label>Selecionar Dia:</label>
+    <select id="timeline-dia">
+        <option value="sabado">Sábado</option>
+        <option value="domingo">Domingo</option>
+    </select>
+
+    <div id="timelineContainer"></div>
+</section>
+
+<script src="js/app.js"></script>
+
+</body>
+</html>
