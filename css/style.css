@@ -1,0 +1,210 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f4f4f4;
+    color: #333;
+}
+
+/* HEADER */
+header {
+    background: #003366;
+    padding: 20px;
+    color: white;
+    text-align: center;
+}
+
+nav {
+    margin-top: 15px;
+}
+
+nav button {
+    margin: 5px;
+    padding: 10px 22px;
+    background: #0055aa;
+    border: none;
+    color: white;
+    font-size: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+nav button:hover {
+    background: #0077dd;
+}
+
+/* ABAS */
+.tab-content {
+    display: none;
+    padding: 25px;
+}
+
+.tab-content.active {
+    display: block;
+    background: white;
+    margin: 20px;
+    border-radius: 8px;
+    padding: 25px;
+}
+
+/* FORMULÁRIOS */
+form label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+form input,
+form select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+form button {
+    margin-top: 20px;
+    background: #0055aa;
+    border: none;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background: #0077dd;
+}
+
+/* LISTAGENS */
+.lista-item {
+    background: #e9e9e9;
+    padding: 15px;
+    margin-top: 12px;
+    border-radius: 6px;
+    border-left: 5px solid #003366;
+}
+
+.lista-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.lista-btns button {
+    margin-left: 5px;
+    padding: 6px 12px;
+    font-size: 13px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-editar {
+    background: #ffaa00;
+    color: #000;
+}
+
+.btn-excluir {
+    background: #cc0000;
+    color: #fff;
+}
+
+.btn-editar:hover {
+    background: #ffbb33;
+}
+
+.btn-excluir:hover {
+    background: #dd2222;
+}
+
+/* CARDS PARA SÁBADO / DOMINGO */
+.card {
+    background: #ffffff;
+    padding: 15px;
+    margin: 12px 0;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0,0,0,0.15);
+    border-left: 6px solid #003366;
+}
+
+.card strong {
+    font-size: 18px;
+}
+
+.card p {
+    margin: 4px 0;
+}
+
+/* STATUS */
+.status {
+    padding: 6px 12px;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.status-nao-iniciado { background: #777; }
+.status-andamento { background: #0a7cff; }
+.status-ok { background: #0dbf38; }
+.status-atrasado { background: #ff2929; }
+.status-concluido { background: #444; }
+
+/* RESUMO GERAL */
+#resumoContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.resumo-card {
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 3px 6px rgba(0,0,0,0.15);
+}
+
+.resumo-card h3 {
+    margin-bottom: 10px;
+}
+
+.resumo-num {
+    font-size: 32px;
+    font-weight: bold;
+    color: #003366;
+}
+
+/* TIMELINE */
+#timelineContainer {
+    margin-top: 25px;
+    padding: 15px;
+}
+
+.timeline-item {
+    display: flex;
+    align-items: center;
+    margin: 12px 0;
+}
+
+.timeline-bar {
+    height: 20px;
+    border-radius: 4px;
+    margin-left: 10px;
+    background: #0055aa;
+}
+
+.timeline-time {
+    width: 60px;
+    font-size: 14px;
+    font-weight: bold;
+}
