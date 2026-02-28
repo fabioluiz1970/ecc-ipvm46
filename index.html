@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECC IPVM 46 - Gestão</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <h1>ECC IPVM 46 - Painel de Controle</h1>
+    <nav>
+        <button class="tab-btn active" data-tab="cadastro">1. Cadastros Base</button>
+        <button class="tab-btn" data-tab="cronograma">2. Cronograma Geral</button>
+        <button class="tab-btn" data-tab="sabado">Execução Sábado</button>
+        <button class="tab-btn" data-tab="domingo">Execução Domingo</button>
+        <button class="tab-btn" data-tab="resumo">Resumo Geral</button>
+        <button class="tab-btn" data-tab="timeline">Timeline</button>
+    </nav>
+</header>
+
+<!-- 1. ABA CADASTRO (INDEPENDENTES) -->
+<section id="cadastro" class="tab-content active">
+    <h2>Cadastros Base (Tabelas Auxiliares)</h2>
+    <p style="margin-bottom: 20px; color: #666;">Cadastre as opções de forma independente. Elas alimentarão os menus do Cronograma.</p>
+    
+    <div class="cadastro-grid">
+        <!-- Bloco Locais -->
+        <div class="cad-box">
+            <h3>Locais</h3>
+            <div class="input-group">
+                <input type="text" id="in-local" placeholder="Ex: Salão">
+                <button type="button" onclick="addParam('locais', 'in-local')">Incluir</button>
+            </div>
+            <ul id="list-locais" class="param-list"></ul>
+        </div>
+
+        <!-- Bloco Equipes -->
+        <div class="cad-box">
+            <h3>Equipes</h3>
+            <div class="input-group">
+                <input type="text" id="in-equipe" placeholder="Ex: Logística">
+                <button type="button" onclick="addParam('equipes', 'in-equipe')">Incluir</button>
+            </div>
+            <ul id="list-equipes" class="param-list"></ul>
+        </div>
+
+        <!-- Bloco Atividades -->
+        <div class="cad-box">
+            <h3>Atividades</h3>
+            <div class="input-group">
+                <input type="text" id="in-atividade" placeholder="Ex: Jantar">
+                <button type="button" onclick="addParam('atividades', 'in-atividade')">Incluir</button>
+            </div>
+            <ul id="list-atividades" class="param-list"></ul>
+        </div>
+
+        <!-- Bloco Ações -->
+        <div class="cad-box">
+            <h3>Ações</h3>
+            <div class="input-group">
+                <input type="text" id="in-acao" placeholder="Ex: Preparar">
+                <button type="button" onclick="addParam('acoes', 'in-acao')">Incluir</button>
+            </div>
+            <ul id="list-acoes" class="param-list"></ul>
+        </div>
+    </div>
+</section>
+
+<!-- 2. ABA CRONOGRAMA -->
+<section id="cronograma" class="tab-content">
+    <h2>Cronograma Geral</h2>
+    <form id="cronogramaForm" class="form-grid">
+        <div>
+            <label>Dia:</label>
+            <select id="crono-dia" required>
+                <option value="sabado">Sábado</option>
+                <option value="domingo">Domingo</option>
+            </select>
+        </div>
+        <div><label>Local:</label><select id="crono-local" required></select></div>
+        <div><label>Equipe:</label><select id="crono-equipe" required></select></div>
+        <div><label>Atividade:</label><select id="crono-atividade" required></select></div>
+        <div><label>Ação:</label><select id="crono-acao" required></select></div>
+        
+        <div><label>Início Previsto:</label><input type="time" id="crono-inicio-prev" required></div>
+        <div><label>Fim Previsto:</label><input type="time" id="crono-fim-prev" required></div>
+        
+        <div style="grid-column: span 2;"><label>Observação:</label><input type="text" id="crono-obs"></div>
+        <div class="btn-align" style="grid-column: span 2;"><button type="submit">Adicionar ao Cronograma</button></div>
+    </form>
+    <div id="cronogramaLista" class="lista-container"></div>
+</section>
+
+<!-- 3. ABA SÁBADO -->
+<section id="sabado" class="tab-content">
+    <h2>Execução — Sábado</h2>
+    <div id="listaSabado" class="cards-container"></div>
+</section>
+
+<!-- 4. ABA DOMINGO -->
+<section id="domingo" class="tab-content">
+    <h2>Execução — Domingo</h2>
+    <div id="listaDomingo" class="cards-container"></div>
+</section>
+
+<!-- 5. RESUMO GERAL -->
+<section id="resumo" class="tab-content">
+    <h2>Resumo Gerencial</h2>
+    <div id="resumoContainer"></div>
+</section>
+
+<!-- 6. TIMELINE -->
+<section id="timeline" class="tab-content">
+    <h2>Timeline do Evento</h2>
+    <div class="filter-bar">
+        <label>Visualizar Dia:</label>
+        <select id="timeline-dia" onchange="renderAll()">
+            <option value="sabado">Sábado</option>
+            <option value="domingo">Domingo</option>
+        </select>
+    </div>
+    <div id="timelineContainer"></div>
+</section>
+
+<script src="js/app.js"></script>
+</body>
+</html>
