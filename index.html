@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECC IPVM 46 - Gestão</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <h1>ECC IPVM 46 - Painel de Controle</h1>
+    <nav>
+        <button class="tab-btn active" data-tab="cadastro">1. Bases</button>
+        <button class="tab-btn" data-tab="cronograma">2. Cronograma</button>
+        <button class="tab-btn" data-tab="sabado">Execução Sábado</button>
+        <button class="tab-btn" data-tab="domingo">Execução Domingo</button>
+        <button class="tab-btn" data-tab="resumo">Resumo Geral</button>
+        <button class="tab-btn" data-tab="timeline">Timeline</button>
+    </nav>
+</header>
+
+<!-- ABA CADASTRO -->
+<section id="cadastro" class="tab-content active">
+    <h2>Cadastro de Bases</h2>
+    <form id="cadastroForm" class="form-grid">
+        <div>
+            <label>Dia:</label>
+            <select id="cad-dia" required>
+                <option value="">Selecione</option>
+                <option value="sabado">Sábado</option>
+                <option value="domingo">Domingo</option>
+            </select>
+        </div>
+        <div><label>Local:</label><input type="text" id="cad-local" required></div>
+        <div><label>Equipe:</label><input type="text" id="cad-equipe" required></div>
+        <div><label>Atividade:</label><input type="text" id="cad-atividade" required></div>
+        <div><label>Ação:</label><input type="text" id="cad-acao" required></div>
+        <div class="btn-align"><button type="submit">Incluir Base</button></div>
+    </form>
+    <div id="cadastroLista" class="lista-container"></div>
+</section>
+
+<!-- ABA CRONOGRAMA -->
+<section id="cronograma" class="tab-content">
+    <h2>Montagem do Cronograma</h2>
+    <form id="cronogramaForm" class="form-grid">
+        <div style="grid-column: span 2;">
+            <label>Selecionar Base:</label>
+            <select id="crono-base" required></select>
+        </div>
+        <div><label>Início Previsto:</label><input type="time" id="crono-inicio-prev" required></div>
+        <div><label>Fim Previsto:</label><input type="time" id="crono-fim-prev" required></div>
+        <div style="grid-column: span 2;"><label>Observação:</label><input type="text" id="crono-obs"></div>
+        <div class="btn-align" style="grid-column: span 2;"><button type="submit">Adicionar ao Cronograma</button></div>
+    </form>
+    <div id="cronogramaLista" class="lista-container"></div>
+</section>
+
+<!-- ABA SÁBADO -->
+<section id="sabado" class="tab-content">
+    <h2>Execução — Sábado</h2>
+    <div id="listaSabado" class="cards-container"></div>
+</section>
+
+<!-- ABA DOMINGO -->
+<section id="domingo" class="tab-content">
+    <h2>Execução — Domingo</h2>
+    <div id="listaDomingo" class="cards-container"></div>
+</section>
+
+<!-- RESUMO GERAL -->
+<section id="resumo" class="tab-content">
+    <h2>Resumo Gerencial</h2>
+    <div id="resumoContainer"></div>
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline" class="tab-content">
+    <h2>Timeline do Evento</h2>
+    <div class="filter-bar">
+        <label>Visualizar Dia:</label>
+        <select id="timeline-dia" onchange="renderTimeline()">
+            <option value="sabado">Sábado</option>
+            <option value="domingo">Domingo</option>
+        </select>
+    </div>
+    <div id="timelineContainer"></div>
+</section>
+
+<script src="js/app.js"></script>
+</body>
+</html>
