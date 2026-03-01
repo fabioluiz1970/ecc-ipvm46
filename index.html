@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECC IPVM 46 - Gestão</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="app-header">
+    <h1>ECC IPVM 46</h1>
+</header>
+
+<!-- TELA PRINCIPAL → CRONOGRAMA -->
+<section id="cronograma" class="app-screen active">
+    <h2>Cronograma Geral</h2>
+
+    <form id="cronogramaForm" class="crono-form">
+        <input type="hidden" id="crono-id">
+
+        <div class="form-row">
+            <label>Dia:</label>
+            <select id="crono-dia">
+                <option value="sabado">Sábado</option>
+                <option value="domingo">Domingo</option>
+            </select>
+        </div>
+
+        <div class="form-row">
+            <label>Atividade:</label>
+            <select id="crono-atividade"></select>
+        </div>
+
+        <div class="form-row">
+            <label>Equipe:</label>
+            <select id="crono-equipe"></select>
+        </div>
+
+        <div class="form-row">
+            <label>Local:</label>
+            <select id="crono-local"></select>
+        </div>
+
+        <div class="form-row">
+            <label>Início Prev:</label>
+            <input type="time" id="crono-inicio">
+        </div>
+
+        <div class="form-row">
+            <label>Fim Prev:</label>
+            <input type="time" id="crono-fim">
+        </div>
+
+        <div class="form-row">
+            <label>Observação:</label>
+            <input type="text" id="crono-obs" placeholder="Opcional">
+        </div>
+
+        <button type="submit" id="btn-salvar-crono" class="btn-primary">Incluir</button>
+    </form>
+
+    <div class="scroll-area">
+        <table class="crono-table">
+            <thead>
+                <tr>
+                    <th>Nº</th>
+                    <th>Dia</th>
+                    <th>Atividade</th>
+                    <th>Equipe</th>
+                    <th>Local</th>
+                    <th>Início</th>
+                    <th>Fim</th>
+                    <th>Tempo</th>
+                    <th>Obs</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="tabela-cronograma-body"></tbody>
+        </table>
+    </div>
+</section>
+
+<!-- TELA EXECUÇÃO -->
+<section id="execucao" class="app-screen">
+    <h2>Execução / Operação</h2>
+
+    <div class="exec-tabs">
+        <button onclick="setExec('sabado')" id="btnSab">Sábado</button>
+        <button onclick="setExec('domingo')" id="btnDom">Domingo</button>
+    </div>
+
+    <div id="listaSabado" class="cards"></div>
+    <div id="listaDomingo" class="cards"></div>
+</section>
+
+<!-- TELA CADASTROS -->
+<section id="cadastros" class="app-screen">
+    <h2>Cadastros Base</h2>
+
+    <div class="cad-grid">
+        <div class="cad-box">
+            <label>Local:</label>
+            <input id="in-local" type="text">
+            <button class="btn-primary" onclick="addBase('locais','in-local')">Incluir</button>
+            <button class="btn-acc" onclick="toggleAcc('#rep-locais')">Ver repositório ▼</button>
+            <div id="rep-locais" class="rep-list"></div>
+        </div>
+
+        <div class="cad-box">
+            <label>Equipe:</label>
+            <input id="in-equipe" type="text">
+            <button class="btn-primary" onclick="addBase('equipes','in-equipe')">Incluir</button>
+            <button class="btn-acc" onclick="toggleAcc('#rep-equipes')">Ver repositório ▼</button>
+            <div id="rep-equipes" class="rep-list"></div>
+        </div>
+
+        <div class="cad-box">
+            <label>Atividade:</label>
+            <input id="in-atividade" type="text">
+            <button class="btn-primary" onclick="addBase('atividades','in-atividade')">Incluir</button>
+            <button class="btn-acc" onclick="toggleAcc('#rep-atividades')">Ver repositório ▼</button>
+            <div id="rep-atividades" class="rep-list"></div>
+        </div>
+
+        <div class="cad-box">
+            <label>Ação:</label>
+            <input id="in-acao" type="text">
+            <button class="btn-primary" onclick="addBase('acoes','in-acao')">Incluir</button>
+            <button class="btn-acc" onclick="toggleAcc('#rep-acoes')">Ver repositório ▼</button>
+            <div id="rep-acoes" class="rep-list"></div>
+        </div>
+    </div>
+</section>
+
+<!-- TELA RESUMO -->
+<section id="resumo" class="app-screen">
+    <h2>Resumo Operacional</h2>
+    <div id="resumoContainer" class="resumo-grid"></div>
+</section>
+
+<!-- TELA TIMELINE -->
+<section id="timeline" class="app-screen">
+    <h2>Timeline</h2>
+
+    <label style="font-weight:600;">Dia:</label>
+    <select id="timeline-dia" onchange="renderTimeline()">
+        <option value="sabado">Sábado</option>
+        <option value="domingo">Domingo</option>
+    </select>
+
+    <div id="timelineContainer" class="timeline"></div>
+</section>
+
+<!-- BACKUP -->
+<section id="backup" class="app-screen">
+    <h2>Backup / Versionamento</h2>
+
+    <button class="btn-primary" onclick="exportarDados()">Exportar Dados (JSON)</button>
+
+    <label class="btn-secondary">
+        Importar Dados
+        <input type="file" accept=".json" onchange="importarDados(event)" hidden>
+    </label>
+</section>
+
+<!-- MENU APP INFERIOR (B2‑B ICON + TEXTO) -->
+<nav class="bottom-menu">
+    <button onclick="openScreen('cronograma')">
+        <span class="icon">📋</span>
+        <span class="txt">Cronograma</span>
+    </button>
+    <button onclick="openScreen('execucao')">
+        <span class="icon">▶️</span>
+        <span class="txt">Execução</span>
+    </button>
+    <button onclick="openScreen('cadastros')">
+        <span class="icon">⋯</span>
+        <span class="txt">Mais</span>
+    </button>
+</nav>
+
+<script src="js/app.js"></script>
+</body>
+</html>
