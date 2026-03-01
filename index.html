@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECC IPVM 46 - Gestão</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <h1>ECC IPVM 46 - Painel de Controle</h1>
+    <nav>
+        <button class="tab-btn active" data-tab="cadastro">Cadastros Base</button>
+        <button class="tab-btn" data-tab="cronograma">Cronograma Geral</button>
+        <button class="tab-btn" data-tab="sabado">Execução Sábado</button>
+        <button class="tab-btn" data-tab="domingo">Execução Domingo</button>
+        <button class="tab-btn" data-tab="resumo">Resumo</button>
+        <button class="tab-btn" data-tab="timeline">Timeline</button>
+        <button class="tab-btn" data-tab="backup">Backup / Versões</button>
+    </nav>
+</header>
+
+<!-- CADASTRO BASE -->
+<section id="cadastro" class="tab-content active">
+    <h2>Cadastros Base</h2>
+
+    <div class="cadastro-inputs">
+        <div class="cad-row">
+            <label>Local:</label>
+            <input id="in-local" type="text">
+            <button onclick="addBase('locais','in-local')">Incluir</button>
+        </div>
+        <div class="cad-row">
+            <label>Equipe:</label>
+            <input id="in-equipe" type="text">
+            <button onclick="addBase('equipes','in-equipe')">Incluir</button>
+        </div>
+        <div class="cad-row">
+            <label>Atividade:</label>
+            <input id="in-atividade" type="text">
+            <button onclick="addBase('atividades','in-atividade')">Incluir</button>
+        </div>
+        <div class="cad-row">
+            <label>Ação:</label>
+            <input id="in-acao" type="text">
+            <button onclick="addBase('acoes','in-acao')">Incluir</button>
+        </div>
+    </div>
+
+    <!-- ACCORDION -->
+    <div class="accordion">
+        <div class="acc-item">
+            <button class="acc-header" onclick="toggleAcc(this)">📁 Locais</button>
+            <div class="acc-body" id="lista-locais"></div>
+        </div>
+        <div class="acc-item">
+            <button class="acc-header" onclick="toggleAcc(this)">📁 Equipes</button>
+            <div class="acc-body" id="lista-equipes"></div>
+        </div>
+        <div class="acc-item">
+            <button class="acc-header" onclick="toggleAcc(this)">📁 Atividades</button>
+            <div class="acc-body" id="lista-atividades"></div>
+        </div>
+        <div class="acc-item">
+            <button class="acc-header" onclick="toggleAcc(this)">📁 Ações</button>
+            <div class="acc-body" id="lista-acoes"></div>
+        </div>
+    </div>
+</section>
+
+<!-- CRONOGRAMA -->
+<section id="cronograma" class="tab-content">
+    <h2>Cronograma Geral</h2>
+
+    <form id="cronogramaForm" class="form-crono">
+        <input type="hidden" id="crono-id">
+
+        <label>Dia:</label>
+        <select id="crono-dia">
+            <option value="sabado">Sábado</option>
+            <option value="domingo">Domingo</option>
+        </select>
+
+        <label>Atividade:</label>
+        <select id="crono-atividade"></select>
+
+        <label>Equipe:</label>
+        <select id="crono-equipe"></select>
+
+        <label>Local:</label>
+        <select id="crono-local"></select>
+
+        <label>Início Prev:</label>
+        <input type="time" id="crono-inicio">
+
+        <label>Fim Prev:</label>
+        <input type="time" id="crono-fim">
+
+        <label>Observação:</label>
+        <input type="text" id="crono-obs">
+
+        <button id="btn-salvar-crono" type="submit">Incluir no Cronograma</button>
+    </form>
+
+    <table class="tabela">
+        <thead>
+            <tr>
+                <th>Nº</th>
+                <th>Dia</th>
+                <th>Atividade</th>
+                <th>Equipe</th>
+                <th>Local</th>
+                <th>Início</th>
+                <th>Fim</th>
+                <th>Tempo</th>
+                <th>Obs</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody id="tabela-cronograma-body"></tbody>
+    </table>
+</section>
+
+<!-- EXECUÇÃO -->
+<section id="sabado" class="tab-content">
+    <h2>Execução Sábado</h2>
+    <div id="listaSabado" class="cards"></div>
+</section>
+
+<section id="domingo" class="tab-content">
+    <h2>Execução Domingo</h2>
+    <div id="listaDomingo" class="cards"></div>
+</section>
+
+<!-- RESUMO -->
+<section id="resumo" class="tab-content">
+    <h2>Resumo Geral</h2>
+    <div id="resumoContainer"></div>
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline" class="tab-content">
+    <h2>Timeline Operacional</h2>
+
+    <label>Dia:</label>
+    <select id="timeline-dia" onchange="renderTimeline()">
+        <option value="sabado">Sábado</option>
+        <option value="domingo">Domingo</option>
+    </select>
+
+    <div id="timelineContainer"></div>
+</section>
+
+<!-- BACKUP -->
+<section id="backup" class="tab-content">
+    <h2>Backup / Versões</h2>
+
+    <button onclick="exportarDados()" class="btn">Exportar Dados (baixar JSON)</button>
+
+    <label class="btn">
+        Importar Dados
+        <input type="file" accept=".json" onchange="importarDados(event)" style="display:none">
+    </label>
+</section>
+
+<script src="js/app.js"></script>
+</body>
+</html>
