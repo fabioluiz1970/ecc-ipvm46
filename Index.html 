@@ -1,0 +1,175 @@
+#   
+<!DOCTYPE html>  
+<html lang="pt-br">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>ECC IPVM 46</title>  
+    <link rel="stylesheet" href="css/style.css">  
+</head>  
+<body>  
+  
+<header class="top-header">  
+    <h1>ECC IPVM 46</h1>  
+</header>  
+  
+<!-- =============== MENU SUPERIOR (FIXO) =============== -->  
+<nav class="top-nav">  
+    <button onclick="openTab('cronograma')">Cronograma</button>  
+    <button onclick="openTab('execucao')">Execução</button>  
+    <button onclick="openTab('cadastros')">Cadastros</button>  
+    <button onclick="openTab('resumo')">Resumo</button>  
+    <button onclick="openTab('timeline')">Timeline</button>  
+    <button onclick="openTab('backup')">Backup</button>  
+</nav>  
+  
+<!-- =============== CRONOGRAMA =============== -->  
+<section id="cronograma" class="tab active">  
+    <h2>Cronograma Geral</h2>  
+  
+    <form id="cronogramaForm" class="form">  
+        <input type="hidden" id="crono-id">  
+  
+        <div class="line">  
+            <label>Dia:</label>  
+            <select id="crono-dia">  
+                <option value="sabado">Sábado</option>  
+                <option value="domingo">Domingo</option>  
+            </select>  
+        </div>  
+  
+        <div class="line">  
+            <label>Atividade:</label>  
+            <select id="crono-atividade"></select>  
+        </div>  
+  
+        <div class="line">  
+            <label>Equipe:</label>  
+            <select id="crono-equipe"></select>  
+        </div>  
+  
+        <div class="line">  
+            <label>Local:</label>  
+            <select id="crono-local"></select>  
+        </div>  
+  
+        <div class="line">  
+            <label>Início Prev:</label>  
+            <input type="text" id="crono-inicio" maxlength="5" placeholder="HH:MM" oninput="maskHora(this)">  
+        </div>  
+  
+        <div class="line">  
+            <label>Fim Prev:</label>  
+            <input type="text" id="crono-fim" maxlength="5" placeholder="HH:MM" oninput="maskHora(this)">  
+        </div>  
+  
+        <div class="line">  
+            <label>Observação:</label>  
+            <input type="text" id="crono-obs">  
+        </div>  
+  
+        <button type="submit" id="btnSalvarCrono">Incluir</button>  
+    </form>  
+  
+    <div class="table-scroll">  
+        <table>  
+            <thead>  
+                <tr>  
+                    <th>Nº</th>  
+                    <th>Dia</th>  
+                    <th>Atividade</th>  
+                    <th>Equipe</th>  
+                    <th>Local</th>  
+                    <th>Início</th>  
+                    <th>Fim</th>  
+                    <th>Tempo</th>  
+                    <th>Obs</th>  
+                    <th>Ações</th>  
+                </tr>  
+            </thead>  
+            <tbody id="lista-cronograma"></tbody>  
+        </table>  
+    </div>  
+</section>  
+  
+<!-- =============== EXECUÇÃO =============== -->  
+<section id="execucao" class="tab">  
+    <h2>Execução</h2>  
+  
+    <div class="exec-switch">  
+        <button onclick="switchExec('sabado')" id="btnSab">Sábado</button>  
+        <button onclick="switchExec('domingo')" id="btnDom">Domingo</button>  
+    </div>  
+  
+    <div id="execSabado" class="cards"></div>  
+    <div id="execDomingo" class="cards" style="display:none"></div>  
+</section>  
+  
+<!-- =============== CADASTRO =============== -->  
+<section id="cadastros" class="tab">  
+    <h2>Cadastros Base</h2>  
+  
+    <div class="cad-col">  
+        <div class="cad-item">  
+            <label>Novo Local</label>  
+            <input id="in-local"><button onclick="addBase('locais','in-local')">+</button>  
+            <button class="rep-btn" onclick="toggleRep('repLocais')">Ver lista ▼</button>  
+            <div id="repLocais" class="rep-box"></div>  
+        </div>  
+  
+        <div class="cad-item">  
+            <label>Nova Equipe</label>  
+            <input id="in-equipe"><button onclick="addBase('equipes','in-equipe')">+</button>  
+            <button class="rep-btn" onclick="toggleRep('repEquipes')">Ver lista ▼</button>  
+            <div id="repEquipes" class="rep-box"></div>  
+        </div>  
+  
+        <div class="cad-item">  
+            <label>Nova Atividade</label>  
+            <input id="in-atividade"><button onclick="addBase('atividades','in-atividade')">+</button>  
+            <button class="rep-btn" onclick="toggleRep('repAtividades')">Ver lista ▼</button>  
+            <div id="repAtividades" class="rep-box"></div>  
+        </div>  
+  
+        <div class="cad-item">  
+            <label>Nova Ação</label>  
+            <input id="in-acao"><button onclick="addBase('acoes','in-acao')">+</button>  
+            <button class="rep-btn" onclick="toggleRep('repAcoes')">Ver lista ▼</button>  
+            <div id="repAcoes" class="rep-box"></div>  
+        </div>  
+    </div>  
+</section>  
+  
+<!-- =============== RESUMO =============== -->  
+<section id="resumo" class="tab">  
+    <h2>Resumo Geral</h2>  
+    <div id="blocoResumo" class="resumo-grid"></div>  
+</section>  
+  
+<!-- =============== TIMELINE =============== -->  
+<section id="timeline" class="tab">  
+    <h2>Timeline</h2>  
+  
+    <label>Dia:</label>  
+    <select id="timelineDia" onchange="renderTimeline()">  
+        <option value="sabado">Sábado</option>  
+        <option value="domingo">Domingo</option>  
+    </select>  
+  
+    <div id="timelineBox"></div>  
+</section>  
+  
+<!-- =============== BACKUP =============== -->  
+<section id="backup" class="tab">  
+    <h2>Backup / Versões</h2>  
+  
+    <button onclick="exportarECC()">Exportar Dados</button>  
+  
+    <label class="import-btn">Importar Dados  
+        <input type="file" accept=".json" onchange="importarECC(event)" hidden>  
+    </label>  
+</section>  
+  
+<script src="js/app.js"></script>  
+</body>  
+</html>  
